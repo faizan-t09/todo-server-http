@@ -23,7 +23,11 @@ function updateTodoHandler(
       }
 
       if (typeof fields.description != "undefined") {
-        todo.description = fields.description;
+        if (Boolean(fields.isAppend) === false) {
+          todo.description = fields.description;
+        } else {
+          todo.description += " " + fields.description;
+        }
       }
 
       fs.writeFile(
@@ -42,4 +46,4 @@ function updateTodoHandler(
   }
 }
 
-export default updateTodoHandler
+export default updateTodoHandler;
